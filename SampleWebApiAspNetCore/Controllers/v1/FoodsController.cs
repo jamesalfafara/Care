@@ -48,7 +48,7 @@ namespace SampleWebApiAspNetCore.Controllers.v1
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
 
             var links = _linkService.CreateLinksForCollection(queryParameters, allItemCount, version);
-            var toReturn = foodItems.Select(x => _linkService.ExpandSingleFoodItem(x, x.Id, version));
+            var toReturn = foodItems.Select(x => _linkService.ExpandSingleItem(x, x.Id, version));
 
             return Ok(new
             {
@@ -70,7 +70,7 @@ namespace SampleWebApiAspNetCore.Controllers.v1
 
             FoodDto item = _mapper.Map<FoodDto>(foodItem);
 
-            return Ok(_linkService.ExpandSingleFoodItem(item, item.Id, version));
+            return Ok(_linkService.ExpandSingleItem(item, item.Id, version));
         }
 
         [HttpPost(Name = nameof(AddFood))]
@@ -95,7 +95,7 @@ namespace SampleWebApiAspNetCore.Controllers.v1
 
             return CreatedAtRoute(nameof(GetSingleFood),
                 new { version = version.ToString(), id = newFoodItem.Id },
-                _linkService.ExpandSingleFoodItem(foodDto, foodDto.Id, version));
+                _linkService.ExpandSingleItem(foodDto, foodDto.Id, version));
         }
 
         [HttpPatch("{id:int}", Name = nameof(PartiallyUpdateFood))]
@@ -133,7 +133,7 @@ namespace SampleWebApiAspNetCore.Controllers.v1
 
             FoodDto foodDto = _mapper.Map<FoodDto>(updated);
 
-            return Ok(_linkService.ExpandSingleFoodItem(foodDto, foodDto.Id, version));
+            return Ok(_linkService.ExpandSingleItem(foodDto, foodDto.Id, version));
         }
 
         [HttpDelete]
@@ -184,7 +184,7 @@ namespace SampleWebApiAspNetCore.Controllers.v1
 
             FoodDto foodDto = _mapper.Map<FoodDto>(existingFoodItem);
 
-            return Ok(_linkService.ExpandSingleFoodItem(foodDto, foodDto.Id, version));
+            return Ok(_linkService.ExpandSingleItem(foodDto, foodDto.Id, version));
         }
 
         [HttpGet("GetRandomMeal", Name = nameof(GetRandomMeal))]

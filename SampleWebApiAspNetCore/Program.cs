@@ -28,6 +28,7 @@ builder.Services.AddCustomCors("AllowAllOrigins");
 
 builder.Services.AddSingleton<ISeedDataService, SeedDataService>();
 builder.Services.AddScoped<IFoodRepository, FoodSqlRepository>();
+builder.Services.AddScoped<ICareRepository, CareSqlRepository>();
 builder.Services.AddScoped(typeof(ILinkService<>), typeof(LinkService<>));
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
@@ -39,8 +40,11 @@ builder.Services.AddVersioning();
 
 builder.Services.AddDbContext<FoodDbContext>(opt =>
     opt.UseInMemoryDatabase("FoodDatabase"));
+builder.Services.AddDbContext<CareDbContext>(opt =>
+    opt.UseInMemoryDatabase("CareDatabase"));
 
 builder.Services.AddAutoMapper(typeof(FoodMappings));
+builder.Services.AddAutoMapper(typeof(CareMappings));
 
 var app = builder.Build();
 

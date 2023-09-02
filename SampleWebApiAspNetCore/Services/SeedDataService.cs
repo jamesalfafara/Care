@@ -5,12 +5,12 @@ namespace SampleWebApiAspNetCore.Services
 {
     public class SeedDataService : ISeedDataService
     {
-        public void Initialize(FoodDbContext context)
+        public void Initialize(CareDbContext context)
         {
-            context.FoodItems.Add(new FoodEntity() { Calories = 1000, Type = "Starter", Name = "Lasagne", Created = DateTime.Now });
-            context.FoodItems.Add(new FoodEntity() { Calories = 1100, Type = "Main", Name = "Hamburger", Created = DateTime.Now });
-            context.FoodItems.Add(new FoodEntity() { Calories = 1200, Type = "Dessert", Name = "Spaghetti", Created = DateTime.Now });
-            context.FoodItems.Add(new FoodEntity() { Calories = 1300, Type = "Starter", Name = "Pizza", Created = DateTime.Now });
+            context.CareItems.Add(new CareEntity() { Effectiveness = 5, Product = "Cleanser", Name = "Master", Created = DateTime.Now });
+            context.CareItems.Add(new CareEntity() { Effectiveness = 5, Product = "Acne Toner", Name = "Luxxe Organix", Created = DateTime.Now });
+            context.CareItems.Add(new CareEntity() { Effectiveness = 5, Product = "Sunscreen", Name = "Belo", Created = DateTime.Now });
+            context.CareItems.Add(new CareEntity() { Effectiveness = 5, Product = "Benzoyl Peroxide", Name = "Derma", Created = DateTime.Now });
 
             context.SaveChanges();
         }
